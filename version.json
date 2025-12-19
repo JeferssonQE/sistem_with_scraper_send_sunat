@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "release_date": "2025-12-18",
+  "changelog": [
+    "Versión inicial del sistema de boletas",
+    "Procesamiento de imágenes y PDFs con IA",
+    "Gestión de clientes, productos y remitentes",
+    "Integración con SUNAT",
+    "Historial de boletas y facturas"
+  ],
+  "download_url": "https://github.com/JeferssonQE/sistem_with_scraper_send_sunat/releases/download/v1.0.0/SistemaBoletas_update_v1.0.0.zip",
+  "required": false
+}

@@ -7,6 +7,7 @@ class Cliente(BaseModel):
     nombre: Optional[str]
     dni: Optional[str] = Field(None, max_length=8)
     ruc: Optional[str] = Field(None, max_length=11)
+    telefono: Optional[str] = Field(None, max_length=15)
 
     @model_validator(mode="after")
     def al_menos_un_identificador(self):

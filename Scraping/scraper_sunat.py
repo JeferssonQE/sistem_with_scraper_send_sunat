@@ -138,23 +138,68 @@ def configurar_driver():
     logging.info("Configurando Drivers")
     load_dotenv()
 
-    chrome_driver_path = ChromeDriverManager().install()
-    service = Service(executable_path=chrome_driver_path)
+    try:
+        chrome_driver_path = ChromeDriverManager().install()
+        logging.info(f"ChromeDriver path: {chrome_driver_path}")
+        service = Service(executable_path=chrome_driver_path)
+    except Exception as e:
+        logging.error(f"Error obteniendo ChromeDriver: {e}")
+        raise
 
-    # Opciones de Chrome
+    # Opciones de Chrome - CONFIGURACIÓN ROBUSTA PARA EJECUTABLE
     chrome_options = Options()
-    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-infobars")
-    chrome_options.add_argument("--disable-dev-shm-usage")
+    
+    # IMPORTANTE: NO usar headless - queremos que sea visible
+    # chrome_options.add_argument("--headless")  # NO AGREGAR ESTO
+    
+    # Configuración para ventana visible y estable
     chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--force-device-scale-factor=1")
+    
+    # Configuración crítica para estabilidad en ejecutables
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--disable-software-rasterizer")
+    
+    # CRÍTICO: Mantener conexión estable con DevTools
+    chrome_options.add_argument("--remote-debugging-port=9223")  # Puerto diferente
+    chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+    chrome_options.add_argument("--disable-infobars")
     chrome_options.add_argument("--log-level=3")
+    
+    # IMPORTANTE: Evitar que Chrome se cierre
+    chrome_options.add_experimental_option("detach", True)
+    
+    # Deshabilitar características de automatización
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation", "enable-logging"])
+    
+    # Preferencias adicionales
+    prefs = {
+        "profile.default_content_setting_values.notifications": 2,
+        "profile.managed_default_content_settings.images": 1,  # Cargar imágenes
+    }
+    chrome_options.add_experimental_option("prefs", prefs)
+    
+    # CRÍTICO: Usar binary_location explícito si es necesario
+    # Esto ayuda cuando se ejecuta desde un ejecutable
+    import sys
+    if getattr(sys, 'frozen', False):
+        # Estamos ejecutando desde un ejecutable
+        logging.info("Ejecutando desde ejecutable compilado")
+        chrome_options.add_argument("--disable-extensions")
+        chrome_options.add_argument("--disable-plugins-discovery")
 
-    lista = ["enable-automation", "enable-logging"]
-    chrome_options.add_experimental_option("excludeSwitches", lista)
-
-    driver = webdriver.Chrome(options=chrome_options, service=service)
-    return driver
+    logging.info("Iniciando Chrome con opciones de ventana visible...")
+    try:
+        driver = webdriver.Chrome(options=chrome_options, service=service)
+        logging.info("Chrome iniciado correctamente")
+        logging.info(f"Ventana de Chrome creada con título: {driver.title}")
+        return driver
+    except Exception as e:
+        logging.error(f"Error al iniciar Chrome: {e}")
+        logging.error(f"Tipo de error: {type(e).__name__}")
+        raise
 
 
 # Función para iniciar sesión

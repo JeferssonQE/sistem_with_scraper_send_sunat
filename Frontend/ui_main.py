@@ -2,6 +2,7 @@
 
 import json
 import logging
+import os
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
@@ -77,9 +78,15 @@ class BoletaApp(QMainWindow):
         left_frame = QVBoxLayout()
         # Sección de Imagen
         self.img_label = ZoomLabel(self)
-        self.img_label.setPixmap(
-            QPixmap("camera_icon.png").scaled(500, 500, Qt.KeepAspectRatio)
-        )
+        # Intentar cargar ícono, si no existe mostrar texto
+        icon_path = "camera_icon.png"
+        if os.path.exists(icon_path):
+            self.img_label.setPixmap(
+                QPixmap(icon_path).scaled(500, 500, Qt.KeepAspectRatio)
+            )
+        else:
+            self.img_label.setText("📷\nSubir Imagen")
+            self.img_label.setStyleSheet("font-size: 48px; color: gray;")
         self.img_label.setFixedSize(300, 350)
 
         self.img_label.setAlignment(Qt.AlignCenter)
@@ -99,27 +106,21 @@ class BoletaApp(QMainWindow):
         # Botón de Borrar Todo
         self.borrar_button = QPushButton("Borrar Todo", self)
         self.borrar_button.setStyleSheet(
-            '''
+            """
             QPushButton {
                 background-color: #ff4d4f;
                 color: white;
                 border-radius: 7px;
-                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
                 padding: 8px;
-                margin: 3
-                px;
+                margin: 3px;
             }
             QPushButton:hover {
                 background-color: darkred;
             }
-        """
-        """  # Estilo del botón
             QPushButton:pressed {
                 background-color: lightcoral;
             }
-
-
-        '''
+        """
         )
         self.borrar_button.clicked.connect(
             self.clean_all

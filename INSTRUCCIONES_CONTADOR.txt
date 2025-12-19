@@ -1,0 +1,104 @@
+═══════════════════════════════════════════════════════════════
+  SISTEMA DE BOLETAS - INSTRUCCIONES PARA EL CONTADOR
+═══════════════════════════════════════════════════════════════
+
+📥 INSTALACIÓN INICIAL (Solo la primera vez)
+═══════════════════════════════════════════════════════════════
+
+1. Descarga el archivo: SistemaBoletas_v1.0.0_YYYYMMDD.zip
+
+2. Extrae el ZIP en una carpeta, ejemplo:
+   C:\SistemaBoletas\
+
+3. Abre el archivo .env con Bloc de Notas y configura:
+   
+   GEMINI_API_KEY=tu_clave_de_gemini_aqui
+   SUNAT_USER=tu_usuario_sunat
+   SUNAT_PASSWORD=tu_contraseña_sunat
+
+4. Guarda y cierra el .env
+
+5. Doble click en SistemaBoletas.exe
+
+¡Listo! El sistema está funcionando.
+
+
+🔄 ACTUALIZAR A UNA NUEVA VERSIÓN
+═══════════════════════════════════════════════════════════════
+
+Cuando te avise que hay una nueva versión disponible:
+
+1. Abre una terminal (CMD) en la carpeta del sistema:
+   - Click derecho en la carpeta → "Abrir en Terminal"
+   - O presiona Win+R, escribe "cmd", Enter
+   - Navega a: cd C:\SistemaBoletas
+
+2. Ejecuta el comando:
+   
+   python updater.py
+
+3. El sistema te mostrará:
+   
+   ┌────────────────────────────────────────┐
+   │ 🎉 Nueva versión disponible!          │
+   │    Versión actual: 1.0.0              │
+   │    Versión nueva: 1.0.1               │
+   │                                        │
+   │ 📝 Cambios:                           │
+   │    • Corrección de errores            │
+   │    • Mejoras de rendimiento           │
+   │                                        │
+   │ ¿Deseas actualizar? (s/n):           │
+   └────────────────────────────────────────┘
+
+4. Escribe: s
+   Presiona: Enter
+
+5. Espera a que descargue e instale (unos segundos)
+
+6. Cuando veas "✅ Actualización instalada correctamente":
+   - Cierra el sistema si está abierto
+   - Vuelve a abrir SistemaBoletas.exe
+
+¡Listo! Ahora tienes la nueva versión.
+
+
+⚠️ IMPORTANTE
+═══════════════════════════════════════════════════════════════
+
+✅ TUS DATOS ESTÁN SEGUROS:
+   • Tus clientes, productos y boletas NO se borran
+   • Tu configuración (.env) NO se modifica
+   • Tus credenciales siguen guardadas
+
+✅ SI ALGO SALE MAL:
+   • El sistema crea un backup automático
+   • Puedes volver a la versión anterior
+   • Archivo de backup: SistemaBoletas.exe.backup
+
+
+🆘 SOLUCIÓN DE PROBLEMAS
+═══════════════════════════════════════════════════════════════
+
+Problema: "python no se reconoce como comando"
+Solución: Instala Python desde python.org
+
+Problema: "No se puede conectar al servidor"
+Solución: Verifica tu conexión a internet
+
+Problema: "Error al instalar actualización"
+Solución: 
+  1. Cierra SistemaBoletas.exe si está abierto
+  2. Intenta de nuevo: python updater.py
+  3. Si persiste, contacta al desarrollador
+
+
+📞 SOPORTE
+═══════════════════════════════════════════════════════════════
+
+Si tienes problemas, contacta al desarrollador con:
+• Captura de pantalla del error
+• Archivo de log: logs/boletas_YYYY-MM-DD.log
+
+
+═══════════════════════════════════════════════════════════════

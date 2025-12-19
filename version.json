@@ -1,0 +1,11 @@
+{
+  "version": "1.0.1",
+  "release_date": "2025-12-19",
+  "changelog": [
+    "Fix: Base de datos se crea automáticamente al iniciar",
+    "Fix: Compatibilidad con Pydantic V2",
+    "Mejoras en el sistema de empaquetado"
+  ],
+  "download_url": "https://github.com/JeferssonQE/sistem_with_scraper_send_sunat/releases/download/v1.0.1/SistemaBoletas_update_v1.0.1.zip",
+  "required": false
+}

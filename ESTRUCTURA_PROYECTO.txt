@@ -1,0 +1,256 @@
+╔══════════════════════════════════════════════════════════════╗
+║              ESTRUCTURA DEL PROYECTO                         ║
+║              Sistema de Boletas v1.0.0                       ║
+╚══════════════════════════════════════════════════════════════╝
+
+SistemaBoletas/
+│
+├── 📁 Backend/                      # Lógica de negocio
+│   ├── BoletaController.py          # Controlador principal
+│   ├── models.py                    # Modelos Pydantic
+│   ├── __init__.py
+│   │
+│   ├── 📁 utils/                    # Utilidades
+│   │   ├── img_to_json.py          # Procesamiento IA (Gemini)
+│   │   ├── whatsapp_send.py        # Envío WhatsApp
+│   │   └── __init__.py
+│   │
+│   └── 📁 tests/                    # Tests del backend
+│       └── ...
+│
+├── 📁 DataBase/                     # Gestión de base de datos
+│   ├── DatabaseManager.py           # Manager principal
+│   ├── admin_bd.py                  # Modo administrador
+│   ├── billing_system.db            # SQLite DB (generado)
+│   ├── sample_data.txt              # Datos de ejemplo
+│   ├── __init__.py
+│   │
+│   └── 📁 tests/                    # Tests de BD
+│       └── ...
+│
+├── 📁 Frontend/                     # Interfaz gráfica (PyQt5)
+│   ├── ui_main.py                   # Ventana principal
+│   ├── __init__.py
+│   │
+│   ├── 📁 views/                    # Vistas/Componentes
+│   │   ├── cliente_view.py         # Vista de cliente
+│   │   ├── producto_view.py        # Vista de productos
+│   │   ├── resumen_view.py         # Vista de resumen
+│   │   └── ...
+│   │
+│   ├── 📁 dialogs/                  # Diálogos/Ventanas
+│   │   ├── sender_dialog.py        # Gestión remitentes
+│   │   ├── product_dialog.py       # Gestión productos
+│   │   └── ...
+│   │
+│   └── 📁 utils/                    # Utilidades UI
+│       ├── tools.py                 # Herramientas comunes
+│       └── ...
+│
+├── 📁 Scraping/                     # Web scraping
+│   └── scraper_sunat.py             # Scraper SUNAT
+│
+├── 📁 logs/                         # Logs de la aplicación
+│   └── boletas_YYYY-MM-DD.log       # Logs diarios
+│
+├── 📁 demo/                         # Demos y capturas
+│   ├── demo.gif
+│   └── ui_show.gif
+│
+├── 📁 utils/                        # Utilidades generales
+│   └── ...
+│
+├── 📁 venv/                         # Entorno virtual (no distribuir)
+│   └── ...
+│
+├── 📁 dist/                         # Ejecutables generados
+│   └── SistemaBoletas.exe           # Ejecutable principal
+│
+├── 📁 build/                        # Archivos de construcción
+│   └── ...                          # (temporal, no distribuir)
+│
+├── 📁 release/                      # Paquetes de distribución
+│   ├── SistemaBoletas/              # Carpeta del paquete
+│   │   ├── SistemaBoletas.exe
+│   │   ├── .env
+│   │   ├── version.json
+│   │   ├── updater.py
+│   │   ├── README.txt
+│   │   ├── DataBase/
+│   │   └── logs/
+│   │
+│   ├── SistemaBoletas_v1.0.0_YYYYMMDD.zip    # Paquete completo
+│   └── SistemaBoletas_update_v1.0.0.zip      # Solo actualización
+│
+├── 📄 main.py                       # ⭐ Punto de entrada principal
+├── 📄 debug.py                      # Script de depuración
+│
+├── 📄 .env                          # ⚙️ Configuración (NO SUBIR A GIT)
+├── 📄 .env.example                  # Plantilla de configuración
+├── 📄 .gitignore                    # Archivos ignorados por Git
+│
+├── 📄 requeriments.txt              # Dependencias Python
+├── 📄 version.json                  # Información de versión
+│
+├── 📄 build_exe.py                  # 🔨 Script para crear ejecutable
+├── 📄 updater.py                    # 🔄 Sistema de actualizaciones
+├── 📄 package_for_distribution.py   # 📦 Empaquetador
+├── 📄 deploy.bat                    # 🚀 Despliegue automatizado
+│
+├── 📄 README.md                     # Documentación del proyecto
+├── 📄 README_USUARIO.txt            # Manual para el usuario final
+├── 📄 DEPLOYMENT.md                 # 📚 Guía completa de despliegue
+├── 📄 QUICK_START.md                # 🚀 Inicio rápido
+├── 📄 RESUMEN_DESPLIEGUE.md         # 📋 Resumen ejecutivo
+├── 📄 COMANDOS_RAPIDOS.txt          # 💡 Comandos útiles
+├── 📄 ESTRUCTURA_PROYECTO.txt       # 📁 Este archivo
+│
+├── 📄 LOGICA NEGOCIO.txt            # Documentación de lógica
+├── 📄 .spec                         # Especificaciones
+│
+└── 📄 boleta.jpeg                   # Imagen de ejemplo
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                    ARCHIVOS CLAVE                            ║
+╚══════════════════════════════════════════════════════════════╝
+
+🎯 DESARROLLO:
+    main.py                          # Ejecutar aplicación
+    Backend/BoletaController.py      # Lógica principal
+    Backend/models.py                # Modelos de datos
+    DataBase/DatabaseManager.py      # Gestión de BD
+    Frontend/ui_main.py              # Interfaz principal
+
+🔨 CONSTRUCCIÓN:
+    build_exe.py                     # Crear ejecutable
+    package_for_distribution.py      # Empaquetar
+    deploy.bat                       # Automatizar todo
+
+🔄 ACTUALIZACIÓN:
+    updater.py                       # Sistema de updates
+    version.json                     # Info de versión
+
+⚙️ CONFIGURACIÓN:
+    .env                             # Credenciales (NO SUBIR)
+    .env.example                     # Plantilla
+    requeriments.txt                 # Dependencias
+
+📚 DOCUMENTACIÓN:
+    DEPLOYMENT.md                    # Guía completa
+    QUICK_START.md                   # Inicio rápido
+    RESUMEN_DESPLIEGUE.md            # Resumen
+    README_USUARIO.txt               # Manual usuario
+    COMANDOS_RAPIDOS.txt             # Comandos útiles
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                ARCHIVOS A DISTRIBUIR                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+✅ INCLUIR en el paquete para el cliente:
+    ✓ SistemaBoletas.exe
+    ✓ .env (desde .env.example)
+    ✓ version.json
+    ✓ updater.py
+    ✓ README.txt (desde README_USUARIO.txt)
+    ✓ DataBase/ (carpeta vacía)
+    ✓ logs/ (carpeta vacía)
+
+❌ NO INCLUIR:
+    ✗ .env (con credenciales reales)
+    ✗ venv/
+    ✗ build/
+    ✗ __pycache__/
+    ✗ .git/
+    ✗ *.pyc
+    ✗ logs/*.log (con datos)
+    ✗ DataBase/billing_system.db (con datos)
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                  FLUJO DE DATOS                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+1. ENTRADA:
+   Imagen/PDF → Backend/utils/img_to_json.py → JSON
+
+2. VALIDACIÓN:
+   JSON → Backend/models.py (Pydantic) → Validado
+
+3. PROCESAMIENTO:
+   Validado → Backend/BoletaController.py → Lógica
+
+4. ALMACENAMIENTO:
+   Lógica → DataBase/DatabaseManager.py → SQLite
+
+5. ENVÍO:
+   Datos → Scraping/scraper_sunat.py → SUNAT
+
+6. INTERFAZ:
+   Usuario ↔ Frontend/ui_main.py ↔ Backend
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                  TECNOLOGÍAS USADAS                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+🐍 Python 3.10+
+🖼️ PyQt5                            # Interfaz gráfica
+🤖 Google Gemini AI                 # Procesamiento de imágenes
+🗄️ SQLite                           # Base de datos
+📊 Pydantic                         # Validación de datos
+🌐 Selenium                         # Web scraping
+🔍 RapidFuzz                        # Búsqueda difusa
+📦 PyInstaller                      # Crear ejecutable
+🧪 Pytest                           # Testing
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                    TAMAÑOS TÍPICOS                           ║
+╚══════════════════════════════════════════════════════════════╝
+
+Ejecutable:                ~80-150 MB
+Paquete completo:          ~85-160 MB
+Paquete actualización:     ~80-150 MB
+Base de datos vacía:       ~20 KB
+Base de datos (1000 reg):  ~500 KB - 2 MB
+Logs diarios:              ~50-500 KB
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                  COMANDOS PRINCIPALES                        ║
+╚══════════════════════════════════════════════════════════════╝
+
+Ejecutar aplicación:
+    python main.py
+
+Construir ejecutable:
+    python build_exe.py
+
+Empaquetar para distribución:
+    python package_for_distribution.py
+
+Despliegue completo:
+    deploy.bat
+
+Verificar actualizaciones:
+    python updater.py --check
+
+Ejecutar tests:
+    pytest
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                      NOTAS                                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+• El proyecto está listo para producción
+• Sigue las instrucciones en DEPLOYMENT.md
+• Para inicio rápido, ver QUICK_START.md
+• Para comandos útiles, ver COMANDOS_RAPIDOS.txt
+• Para soporte, contacta al desarrollador
+
+Versión: 1.0.0
+Fecha: Diciembre 2025
+Estado: ✅ Listo para Producción

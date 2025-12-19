@@ -89,9 +89,9 @@ class ResumenView(QWidget):
         return {
             "serie": self.serie,
             "numero": self.numero,
-            "sub_total": round(self.valor_total, 2),
-            "igv_total": self.igv_total,
-            "total": self.total_importe,
+            "sub_total": round(self.valor_total or 0, 2),
+            "igv_total": self.igv_total or 0,
+            "total": self.total_importe or 0,
         }
 
     def clean_all(self):

@@ -1,0 +1,212 @@
+╔══════════════════════════════════════════════════════════════╗
+║           COMANDOS RÁPIDOS - SISTEMA DE BOLETAS              ║
+╚══════════════════════════════════════════════════════════════╝
+
+📦 DESPLIEGUE COMPLETO (TODO EN UNO)
+═══════════════════════════════════════════════════════════════
+Windows:
+    deploy.bat
+
+Linux/Mac:
+    python build_exe.py && python package_for_distribution.py
+
+
+🔨 CONSTRUIR EJECUTABLE
+═══════════════════════════════════════════════════════════════
+    python build_exe.py
+
+Resultado: dist/SistemaBoletas.exe
+
+
+📦 CREAR PAQUETES DE DISTRIBUCIÓN
+═══════════════════════════════════════════════════════════════
+    python package_for_distribution.py
+
+Resultado: 
+    - release/SistemaBoletas_v1.0.0_YYYYMMDD.zip (completo)
+    - release/SistemaBoletas_update_v1.0.0.zip (actualización)
+
+
+🔄 VERIFICAR ACTUALIZACIONES
+═══════════════════════════════════════════════════════════════
+Solo verificar:
+    python updater.py --check
+
+Verificar e instalar:
+    python updater.py
+
+
+🚀 EJECUTAR LA APLICACIÓN
+═══════════════════════════════════════════════════════════════
+Modo normal:
+    python main.py
+
+Modo administrador (gestión de BD):
+    python main.py --admin
+
+
+🧪 TESTING
+═══════════════════════════════════════════════════════════════
+Ejecutar tests:
+    pytest
+
+Ejecutar tests con cobertura:
+    pytest --cov=Backend --cov=DataBase
+
+
+📊 BASE DE DATOS
+═══════════════════════════════════════════════════════════════
+Crear/recrear tablas:
+    python DataBase/DatabaseManager.py
+
+Modo administrador:
+    python main.py --admin
+
+
+🐛 DEPURACIÓN
+═══════════════════════════════════════════════════════════════
+Ver logs de hoy:
+    type logs\boletas_2025-12-18.log
+
+Buscar errores en logs:
+    findstr "ERROR" logs\boletas_2025-12-18.log
+
+Ver últimas 50 líneas:
+    powershell Get-Content logs\boletas_2025-12-18.log -Tail 50
+
+
+📝 VERSIONADO
+═══════════════════════════════════════════════════════════════
+Editar versión:
+    notepad version.json
+
+Formato: MAJOR.MINOR.PATCH
+    - Bug fix:      1.0.0 → 1.0.1
+    - Nueva feature: 1.0.0 → 1.1.0
+    - Cambio mayor:  1.0.0 → 2.0.0
+
+
+🔧 INSTALACIÓN DE DEPENDENCIAS
+═══════════════════════════════════════════════════════════════
+Instalar todas:
+    pip install -r requeriments.txt
+
+Actualizar todas:
+    pip install --upgrade -r requeriments.txt
+
+Instalar PyInstaller:
+    pip install pyinstaller
+
+
+🌐 CONFIGURACIÓN
+═══════════════════════════════════════════════════════════════
+Editar configuración:
+    notepad .env
+
+Crear desde plantilla:
+    copy .env.example .env
+
+
+📚 DOCUMENTACIÓN
+═══════════════════════════════════════════════════════════════
+Ver guía completa:
+    DEPLOYMENT.md
+
+Ver inicio rápido:
+    QUICK_START.md
+
+Ver resumen:
+    RESUMEN_DESPLIEGUE.md
+
+Manual de usuario:
+    README_USUARIO.txt
+
+
+🔒 SEGURIDAD
+═══════════════════════════════════════════════════════════════
+⚠️ NUNCA subas al repositorio:
+    - .env (credenciales)
+    - DataBase/billing_system.db (datos)
+    - logs/*.log (información sensible)
+
+✅ SÍ sube al repositorio:
+    - .env.example (plantilla)
+    - Código fuente
+    - Documentación
+
+
+📤 DISTRIBUCIÓN
+═══════════════════════════════════════════════════════════════
+1. Construir:       python build_exe.py
+2. Empaquetar:      python package_for_distribution.py
+3. Subir a servidor: (manual)
+4. Actualizar version.json en servidor
+5. Notificar al cliente
+
+
+🆘 SOLUCIÓN RÁPIDA DE PROBLEMAS
+═══════════════════════════════════════════════════════════════
+"PyInstaller no encontrado":
+    pip install pyinstaller
+
+"Error al construir ejecutable":
+    rmdir /s /q build dist
+    python build_exe.py
+
+"Error de API_KEY":
+    - Verificar .env existe
+    - Verificar API_KEY está configurada
+    - Sin espacios: API_KEY=tu_clave
+
+"Base de datos corrupta":
+    del DataBase\billing_system.db
+    python DataBase\DatabaseManager.py
+
+
+💡 TIPS
+═══════════════════════════════════════════════════════════════
+✓ Usa deploy.bat para automatizar todo
+✓ Prueba en máquina limpia antes de distribuir
+✓ Mantén backups de cada versión
+✓ Documenta todos los cambios
+✓ Responde rápido a reportes de bugs
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                    FLUJO DE TRABAJO                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+DESARROLLO:
+    1. Hacer cambios en el código
+    2. Probar localmente: python main.py
+    3. Ejecutar tests: pytest
+    4. Commit y push
+
+DESPLIEGUE:
+    1. Actualizar version.json
+    2. Ejecutar: deploy.bat
+    3. Subir archivos de release/ al servidor
+    4. Actualizar version.json en servidor
+    5. Notificar al cliente
+
+ACTUALIZACIÓN:
+    1. Cliente ejecuta: python updater.py
+    2. O automático al iniciar la app
+    3. Descarga e instala nueva versión
+    4. Reinicia la aplicación
+
+SOPORTE:
+    1. Cliente reporta error
+    2. Pedir log: logs/boletas_YYYY-MM-DD.log
+    3. Analizar y reproducir
+    4. Corregir bug
+    5. Desplegar hotfix
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                  ¡LISTO PARA PRODUCCIÓN!                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+Ejecuta:  deploy.bat
+
+Y sigue las instrucciones en RESUMEN_DESPLIEGUE.md

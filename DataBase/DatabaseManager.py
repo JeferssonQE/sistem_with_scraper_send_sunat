@@ -14,6 +14,8 @@ class DatabaseManager:
             db_path = os.path.join(base_dir, "billing_system.db")
         self.conn = sqlite3.connect(db_path, check_same_thread=False)
         self.cursor = self.conn.cursor()
+        # Crear tablas automáticamente si no existen
+        self.create_tables()
 
     def close(self):
         self.conn.close()
@@ -42,6 +44,7 @@ class DatabaseManager:
             name TEXT NOT NULL,
             dni TEXT UNIQUE,
             ruc TEXT UNIQUE,
+            telefono TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (id_sender) REFERENCES sender(id) ON DELETE CASCADE
         );
@@ -103,7 +106,7 @@ class DatabaseManager:
         )
         self.conn.commit()
 
-    def insert_client(self, id_sender, name, dni, ruc):
+    def insert_client(self, id_sender, name, dni, ruc, telefono=None):
         """Inserta un nuevo cliente o devuelve ID si ya existe."""
         self.cursor.execute(
             """
@@ -117,10 +120,10 @@ class DatabaseManager:
 
         self.cursor.execute(
             """
-            INSERT INTO clients (id_sender, name, dni, ruc)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO clients (id_sender, name, dni, ruc, telefono)
+            VALUES (?, ?, ?, ?, ?)
             """,
-            (id_sender, name, dni, ruc),
+            (id_sender, name, dni, ruc, telefono),
         )
         self.conn.commit()
         return self.cursor.lastrowid
@@ -307,14 +310,14 @@ class DatabaseManager:
         )
         self.conn.commit()
 
-    def update_client(self, id_client, name, dni, ruc):
+    def update_client(self, id_client, name, dni, ruc, telefono=None):
         self.cursor.execute(
             """
             UPDATE clients
-            SET name = ?, dni = ?, ruc = ?
+            SET name = ?, dni = ?, ruc = ?, telefono = ?
             WHERE id = ?
         """,
-            (name, dni, ruc, id_client),
+            (name, dni, ruc, telefono, id_client),
         )
         self.conn.commit()
 
@@ -336,34 +339,6 @@ class DatabaseManager:
 
 if __name__ == "__main__":
     db_manager = DatabaseManager()
-    """
-    from dotenv import load_dotenv
-    import os
-
-    load_dotenv()
-
-    # Obtener usuarios de prueba
-    user1 = {
-        "name": os.getenv("TEST_USER_1_NAME"),
-        "ruc": os.getenv("TEST_USER_1_RUC"),
-        "user": os.getenv("TEST_USER_1_USER"),
-        "password": os.getenv("TEST_USER_1_PASSWORD")
-    }
-    user2 = {
-        "name": os.getenv("TEST_USER_2_NAME"),
-        "ruc": os.getenv("TEST_USER_2_RUC"),
-        "user": os.getenv("TEST_USER_2_USER"),
-        "password": os.getenv("TEST_USER_2_PASSWORD")
-    }
-
-    db_manager.insert_sender(
-        user1["name"], user1["ruc"], user1["user"], user1["password"]
-    )
-    db_manager.insert_sender(
-        user2["name"], user2["ruc"], user2["user"], user2["password"]
-    )
-    """
-
     # db_manager.delete_all_data()  # Limpia la base de datos para pruebas
     db_manager.create_tables()  # Crea las tablas nuevamente
     db_manager.close()

@@ -559,27 +559,21 @@ class ProductView(QWidget):
         boton_borrar = QPushButton("X")
 
         boton_borrar.setStyleSheet(
-            '''
+            """
             QPushButton {
                 background-color: #ff4d4f;
                 color: white;
                 border-radius: 7px;
-                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
                 padding: 8px;
-                margin: 3
-                px;
+                margin: 3px;
             }
             QPushButton:hover {
                 background-color: darkred;
             }
-        """
-        """  # Estilo del botón
             QPushButton:pressed {
                 background-color: lightcoral;
             }
-
-
-        '''
+        """
         )
         sombra = QGraphicsDropShadowEffect()
         sombra.setBlurRadius(15)

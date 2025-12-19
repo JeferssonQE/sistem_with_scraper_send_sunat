@@ -27,6 +27,7 @@ class ClienteView(QWidget):
         self.num_doc_entry = None
         self.nombre_entry = None
         self.ruc_cliente = None
+        self.telefono_entry = None
         self.fecha_entry = None
         self.id_cliente_sugerido = None
 
@@ -57,12 +58,14 @@ class ClienteView(QWidget):
             parse_func=parse_cliente,
         )
         self.ruc_cliente = QLineEdit()
+        self.telefono_entry = QLineEdit()
         self.fecha_entry = QDateEdit()
 
         # Configuración de campos
         self.num_doc_entry.setValidator(QIntValidator())
         self.num_doc_entry.setMaxLength(8)
         self.ruc_cliente.setMaxLength(11)
+        self.telefono_entry.setMaxLength(15)
 
         self.ruc_cliente.textChanged.connect(self.actualizar_tipo_documento)
         self.fecha_entry.setCalendarPopup(True)
@@ -79,8 +82,12 @@ class ClienteView(QWidget):
         cliente_layout.addWidget(QLabel("RUC"), 1, 0)
         cliente_layout.addWidget(self.ruc_cliente, 1, 1)
 
-        cliente_layout.addWidget(QLabel("Fecha"), 1, 2)
-        cliente_layout.addWidget(self.fecha_entry, 1, 3)
+        cliente_layout.addWidget(QLabel("Teléfono"), 1, 2)
+        cliente_layout.addWidget(self.telefono_entry, 1, 3)
+
+        # Fila 3
+        cliente_layout.addWidget(QLabel("Fecha"), 2, 2)
+        cliente_layout.addWidget(self.fecha_entry, 2, 3)
 
         cliente_layout.setColumnStretch(0, 1)  # Etiqueta "No. DNI" / "RUC"
         cliente_layout.setColumnStretch(1, 2)  # Campo de entrada
@@ -107,6 +114,7 @@ class ClienteView(QWidget):
             self.num_doc_entry.setText(cliente_data.get("dni", ""))
             self.nombre_entry.setEditText(cliente_data.get("cliente", ""))
             self.ruc_cliente.setText(cliente_data.get("ruc", ""))
+            self.telefono_entry.setText(cliente_data.get("telefono", ""))
 
             fecha_str = cliente_data.get("fecha", "")
             fecha_qdate = QDate.fromString(fecha_str, "dd/MM/yyyy")
@@ -125,11 +133,13 @@ class ClienteView(QWidget):
                 nombre = cliente_data[0] or ""
                 dni = cliente_data[1] or ""
                 ruc = cliente_data[2] or ""
-                id_cliente = cliente_data[3]
+                telefono = cliente_data[3] if len(cliente_data) > 3 else ""
+                id_cliente = cliente_data[4] if len(cliente_data) > 4 else cliente_data[3]
 
                 self.nombre_entry.setEditText(nombre)
                 self.num_doc_entry.setText(dni)
                 self.ruc_cliente.setText(ruc)
+                self.telefono_entry.setText(telefono if isinstance(telefono, str) else "")
                 self.id_cliente_sugerido = id_cliente
         except Exception as e:
             logging.error(
@@ -141,10 +151,12 @@ class ClienteView(QWidget):
         nombre = self.nombre_entry.currentText().strip().upper()
         dni = self.num_doc_entry.text().strip()
         ruc = self.ruc_cliente.text().strip()
+        telefono = self.telefono_entry.text().strip()
         return {
             "nombre": nombre or None,
             "dni": dni or None,
             "ruc": ruc or None,
+            "telefono": telefono or None,
         }
 
     def clean_all(self):
@@ -152,6 +164,7 @@ class ClienteView(QWidget):
         self.num_doc_entry.clear()
         self.nombre_entry.clear()
         self.ruc_cliente.clear()
+        self.telefono_entry.clear()
         self.fecha_entry.setDate(QDate.currentDate())
 
     def obtener_fecha(self):

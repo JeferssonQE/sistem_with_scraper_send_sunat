@@ -39,7 +39,8 @@ class BoletaController:
             nombre = data["cliente"]["nombre"]
             dni = data["cliente"]["dni"]
             ruc = data["cliente"]["ruc"]
-            id_cliente = self.db.insert_client(id_remitente, nombre, dni, ruc)
+            telefono = data["cliente"].get("telefono")
+            id_cliente = self.db.insert_client(id_remitente, nombre, dni, ruc, telefono)
             logging.info("Insertado cliente ")
             # -- guardar factura--
             total = data["resumen"]["total"]

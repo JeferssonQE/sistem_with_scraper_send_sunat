@@ -36,12 +36,6 @@ C:\Users\jefersson\Desktop\PruebaContador\SistemaBoletas\
    API_KEY=tu_api_key_de_google_gemini_aqui
    ```
 
-3. **Reemplaza con tu API Key real:**
-   ```
-   API_KEY=AIzaSyDO4Yu61G3wgHwAclZplY3JdtfGylQdERQ
-   ```
-   (O la que uses)
-
 4. **Guarda y cierra**
 
 ---

@@ -1,5 +1,6 @@
 # Sistema de Facturación Automatizada
 (ESTE PROYECTO ESTA SIENDO LLEVADO COMO PWA Y DESPLEGADO A EL PUBLICO)
+
 Sistema de escritorio para la emisión automatizada de boletas y facturas electrónicas con envío directo a SUNAT mediante web scraping e inteligencia artificial.
 
 [Ver Demo](#demo)
